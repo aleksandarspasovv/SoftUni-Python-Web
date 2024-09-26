@@ -7,11 +7,11 @@ from djangointroduction.todo_app.models import Task
 # Create your views here.
 
 def my_view(request):
-    return http.HttpResponse("<h1>Hello!</h1>")
+    return http.HttpResponse("<h1>Obicham Bebo!</h1>")
 
 
 def add_view(request):
-    return http.HttpResponse("<h1>Magi</h1>")
+    return http.HttpResponse("<h1>Mnogo Obicham Bebe Mace</h1>")
 
 
 def advanced_view(result):
