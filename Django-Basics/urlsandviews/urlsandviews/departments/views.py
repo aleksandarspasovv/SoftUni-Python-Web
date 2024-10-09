@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect
 
 
@@ -10,7 +10,7 @@ def index(request):
 
 
 def second_view(request, *args, **kwargs):
-    return HttpResponse(f'<h1>Args: {args}, Kwargs: {kwargs} </h1>')
+    return HttpResponseNotFound()
 
 
 def redirect_to_softuni(request):
