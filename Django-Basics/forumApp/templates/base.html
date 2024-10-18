@@ -1,6 +1,7 @@
 {% load static %}
 {#{% load current_time %}#}
 {#{% load user_info %}#}
+{% load markdown %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,7 @@
     <h1>Current Time Is: {{ current_time }}</h1>
     <h2>
         {{ some_text }}
+        {{ some_tex }}
     </h2>
     <h3>
         {% for user in users %}

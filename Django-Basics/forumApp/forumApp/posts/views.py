@@ -8,7 +8,7 @@ def index(request):
 
     context = {
         'current_time': datetime.now(),
-        'some_text': 'I am the best programmer',
+        'some_text': 'I am the **best** programmer',
         'users': ['Ivan', 'Pesho'],
     }
 
