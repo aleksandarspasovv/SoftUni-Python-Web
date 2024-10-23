@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 from forumApp.posts.mixins import DisabledRequiredFields
 from forumApp.posts.models import Post
@@ -16,6 +17,24 @@ class PostBaseForm(forms.ModelForm):
             }
         }
 
+    def clean_author(self):
+        author = self.cleaned_data.get('author')
+
+        if author[0] != author[0].upper():
+            raise ValidationError("Author must be with a capital Letter")
+
+        return author
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        title = cleaned_data.get('title')
+        content = cleaned_data.get('content')
+
+        if title and content and title in content:
+            raise ValidationError('tile cannot be included in the content')
+
+        return cleaned_data
 
 class PostCreateForm(PostBaseForm):
     pass
