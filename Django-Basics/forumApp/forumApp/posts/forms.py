@@ -1,8 +1,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms import formset_factory
 
 from forumApp.posts.mixins import DisabledRequiredFields
-from forumApp.posts.models import Post
+from forumApp.posts.models import Post, Comment
 
 
 class PostBaseForm(forms.ModelForm):
@@ -80,3 +81,34 @@ class SearchForm(forms.Form):
 #     languages = forms.ChoiceField(
 #         choices=LanguageChoice.choices
 #     )
+
+
+class CommentForm(forms.Form):
+    class Meta:
+        model = Comment
+        fields = ('author', 'content',)
+
+        labels = {
+            'author': '',
+            'content': '',
+        }
+
+        error_messages = {
+            'author': {
+                'required': 'Author name is required'
+            },
+            'content': {
+                'required': 'Content is required'
+            },
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['author'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'form-control'
+        })
+
+
+CommentSetForm = formset_factory(CommentForm, extra=3)
