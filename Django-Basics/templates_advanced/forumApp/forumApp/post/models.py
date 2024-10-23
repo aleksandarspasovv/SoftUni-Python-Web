@@ -1,7 +1,7 @@
 from django.db import models
 
-from forumApp.posts.choices import LanguageChoice
-from forumApp.posts.validators import BadLanguageValidator
+from forumApp.post.choices import LanguageChoice
+from forumApp.post.validators import BadLanguageValidator
 
 
 class Post(models.Model):

@@ -1,10 +1,6 @@
-from datetime import datetime
-
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
-from forumApp.posts.forms import PostBaseForm, PostCreateForm, PostDeleteForm, SearchForm, PostEditForm
-from forumApp.posts.models import Post
+from forumApp.post.forms import PostCreateForm, PostDeleteForm, SearchForm, PostEditForm
+from forumApp.post.models import Post
 
 
 def index(request):
@@ -29,7 +25,7 @@ def dashboard(request):
         "form": form,
     }
 
-    return render(request, 'posts/dashboard.html', context)
+    return render(request, 'post/dashboard.html', context)
 
 
 def add_post(request):
@@ -44,27 +40,27 @@ def add_post(request):
         "form": form,
     }
 
-    return render(request, 'posts/add-post.html', context)
+    return render(request, 'post/add-post.html', context)
 
 
 def edit_post(request, pk: int):
     post = Post.objects.get(pk=pk)
 
-    if request.method == 'POTS':
+    if request.method == 'POST':
         form = PostEditForm(request.POST, instance=post)
 
         if form.is_valid():
             form.save()
             return redirect('dash')
-
     else:
         form = PostEditForm(instance=post)
 
     context = {
-        'form': form,
-        'post': post
+        "form": form,
+        "post": post,
     }
-    return render(request, 'posts/edit-post.html', context)
+
+    return render(request, 'post/edit-post.html', context)
 
 
 def details_page(request, pk: int):
@@ -74,7 +70,7 @@ def details_page(request, pk: int):
         "post": post,
     }
 
-    return render(request, 'posts/details-post.html', context)
+    return render(request, 'post/details-post.html', context)
 
 
 def delete_post(request, pk: int):
@@ -90,4 +86,4 @@ def delete_post(request, pk: int):
         "post": post,
     }
 
-    return render(request, 'posts/delete-post.html', context)
+    return render(request, 'post/delete-post.html', context)

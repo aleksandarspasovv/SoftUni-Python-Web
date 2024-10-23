@@ -1,5 +1,5 @@
 from django.urls import path, include
-from forumApp.posts.views import dashboard, index, add_post, delete_post, details_page, edit_post
+from forumApp.post.views import dashboard, index, add_post, delete_post, details_page, edit_post
 
 urlpatterns = [
     path('', index, name='index'),
