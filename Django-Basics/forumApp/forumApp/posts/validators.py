@@ -16,3 +16,10 @@ class BadLanguageValidator:
         for bad_word in self.bad_words:
             if bad_word.lower() in value.lower():
                 raise ValidationError('The text contains bad language!')
+
+
+def bad_language_validator(value):
+    bad_words = ['bad_word_1', 'bad_word_2']
+    for bad_word in bad_words:
+        if bad_word in value:
+            raise ValidationError('Bad Languages Used')

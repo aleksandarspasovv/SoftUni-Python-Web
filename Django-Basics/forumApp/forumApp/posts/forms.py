@@ -1,5 +1,6 @@
 from django import forms
 
+from forumApp.posts.mixins import DisabledRequiredFields
 from forumApp.posts.models import Post
 
 
@@ -7,6 +8,13 @@ class PostBaseForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = "__all__"
+
+        error_messages = {
+            'title': {
+                'required': '...',
+                'max_length': 'Message too long',
+            }
+        }
 
 
 class PostCreateForm(PostBaseForm):
@@ -17,12 +25,10 @@ class PostEditForm(PostBaseForm):
     pass
 
 
-class PostDeleteForm(PostBaseForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class PostDeleteForm(PostBaseForm, DisabledRequiredFields):
+    disabled_fields = ('__all__', )
+    pass
 
-        for field in self.fields:
-            self.fields[field].disabled = True
 
 
 class SearchForm(forms.Form):
