@@ -1,8 +1,9 @@
 from datetime import datetime
 
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, PostEditForm, CommentSetForm
 from forumApp.posts.models import Post
@@ -18,10 +19,18 @@ class Index(View):
 
 
 class IndexView(TemplateView):
+    template_name = 'common/index.html'  # static template
+    extra_context = {
+        'static_time': datetime.now
+    }
 
-    template_name = 'common/index.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-    def get_template_names(self):
+        context['dynamic_info'] = datetime.now()  # към контекста допавяме dynamic info & datetime,now
+        return context
+
+    def get_template_names(self):  # dynamica template
         if self.request.user.is_authenticated:
             return ['common/index_logged.html']
         else:
@@ -125,3 +134,6 @@ def delete_post(request, pk: int):
     }
 
     return render(request, 'posts/delete-post.html', context)
+
+class RedirectHomeView(RedirectView):
+    url = reverse_lazy('index')
