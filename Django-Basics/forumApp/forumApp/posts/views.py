@@ -1,21 +1,40 @@
 from datetime import datetime
 
-from django.forms import modelform_factory
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.views import View
+from django.views.generic import TemplateView
 
-from forumApp.posts.forms import PostBaseForm, PostCreateForm, PostDeleteForm, SearchForm, PostEditForm, CommentSetForm
+from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, PostEditForm, CommentSetForm
 from forumApp.posts.models import Post
 
 
-def index(request):
-    post_form = modelform_factory(Post, fields=('title', 'author', 'content', 'languages'))
+class Index(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            "dynamic_time": datetime.now(),
+        }
 
-    context = {
-        "my_form": post_form,
-    }
+        return render(request, 'common/index.html', context)
 
-    return render(request, 'common/index.html', context)
+
+class IndexView(TemplateView):
+
+    template_name = 'common/index.html'
+
+    def get_template_names(self):
+        if self.request.user.is_authenticated:
+            return ['common/index_logged.html']
+        else:
+            return ['common/index.html']
+
+# def index(request):
+#     post_form = modelform_factory(Post, fields=('title', 'author', 'content', 'languages'))
+#
+#     context = {
+#         "my_form": post_form,
+#     }
+#
+#     return render(request, 'common/index.html', context)
 
 
 def dashboard(request):
