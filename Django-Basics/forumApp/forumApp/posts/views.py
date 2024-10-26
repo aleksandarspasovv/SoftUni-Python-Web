@@ -46,21 +46,24 @@ class IndexView(TemplateView):
 #     return render(request, 'common/index.html', context)
 
 
-def dashboard(request):
-    form = SearchForm(request.GET)
-    posts = Post.objects.all()
 
-    if request.method == "GET":
-        if form.is_valid():
-            query = form.cleaned_data['query']
-            posts = posts.filter(title__icontains=query)
+class DashboardView(ListView)
 
-    context = {
-        "posts": posts,
-        "form": form,
-    }
-
-    return render(request, 'posts/dashboard.html', context)
+# def dashboard(request):
+#     form = SearchForm(request.GET)
+#     posts = Post.objects.all()
+#
+#     if request.method == "GET":
+#         if form.is_valid():
+#             query = form.cleaned_data['query']
+#             posts = posts.filter(title__icontains=query)
+#
+#     context = {
+#         "posts": posts,
+#         "form": form,
+#     }
+#
+#     return render(request, 'posts/dashboard.html', context)
 
 
 def add_post(request):
