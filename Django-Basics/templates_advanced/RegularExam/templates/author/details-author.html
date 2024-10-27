@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Author Details</h2>
+<p>First Name: {{ author.first_name }}</p>
+<p>Last Name: {{ author.last_name }}</p>
+<p>Number of Pets: {{ author.pets_number }}</p>
+<p>Info: {{ author.info }}</p>
+<a href="{% url 'edit-author-profile' %}">Edit</a>
+<a href="{% url 'delete-author-profile' %}">Delete</a>
+{% endblock %}

@@ -52,6 +52,7 @@ class DashboardView(ListView):
     form_class = SearchForm
     success_url = reverse_lazy('dash')
 
+<<<<<<< HEAD
     def get_queryset(self):
         if 'query' in self.request.GET:
             query = self.request.GET.get('query')
@@ -59,6 +60,26 @@ class DashboardView(ListView):
             self.queryset = self.queryset.filter(title__icontains=query)
 
         return self.queryset
+=======
+
+class DashboardView(ListView)
+
+# def dashboard(request):
+#     form = SearchForm(request.GET)
+#     posts = Post.objects.all()
+#
+#     if request.method == "GET":
+#         if form.is_valid():
+#             query = form.cleaned_data['query']
+#             posts = posts.filter(title__icontains=query)
+#
+#     context = {
+#         "posts": posts,
+#         "form": form,
+#     }
+#
+#     return render(request, 'posts/dashboard.html', context)
+>>>>>>> b29c4a6c7b28027ed39d906a1fa4a935af4aa779
 
 
 # def dashboard(request):
