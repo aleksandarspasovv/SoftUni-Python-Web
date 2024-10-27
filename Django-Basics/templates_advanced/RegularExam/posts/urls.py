@@ -1,4 +1,3 @@
-# posts/urls.py
 from django.urls import path
 from posts.views import dashboard_view, create_post_view, post_details_view, edit_post_view, delete_post_view
 

@@ -9,7 +9,7 @@
             <form id="delete" class="register-form" method="POST" action="{% url 'delete-author' author.pk %}">
                 {% csrf_token %}
                 <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
-                <!-- Confirm Button -->
+
                 <button type="submit">Confirm</button>
             </form>
         </div>

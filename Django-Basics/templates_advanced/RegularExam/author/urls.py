@@ -1,6 +1,4 @@
-# authors/urls.py
 from django.urls import path
-
 from author.views import create_author_profile_view, author_details_view, edit_author_view, delete_author_view
 
 urlpatterns = [

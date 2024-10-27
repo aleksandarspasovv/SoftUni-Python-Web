@@ -7,26 +7,26 @@
         <div id="details-wrapper">
             <h2>Author's Profile Details</h2>
 
-            <!-- Profile Picture -->
+            
             <img id="details-img" src="{{ author.image_url|default:'/static/images/default.png' }}" alt="Profile Picture" />
 
-            <!-- Author's Full Name -->
+          
             <p id="details-title">{{ author.first_name }} {{ author.last_name }}</p>
 
-            <!-- Published Posts Count -->
+            
             <p id="nutrition">Published Posts: {{ author.posts.count }}</p>
 
             <div id="info-wrapper">
                 <div id="details-description">
-                    <!-- Pets Number -->
+                    
                     <p>Pets Number: {{ author.pets_number }}</p>
 
-                    <!-- Author's Info -->
+                    
                     {% if author.info %}
                         <p>{{ author.info }}</p>
                     {% endif %}
 
-                    <!-- Last Updated Post -->
+
                     <p>Last Updated Post:
                         {% if author.posts.exists %}
                             <strong>{{ author.posts.last.title }}</strong>
@@ -36,7 +36,7 @@
                     </p>
                 </div>
 
-                <!-- Edit and Delete buttons -->
+
                 <div id="action-buttons">
                     <a href="{% url 'edit-author' author.pk %}" id="edit-btn">Edit</a>
                     <a href="{% url 'delete-author' author.pk %}" id="delete-btn">Delete</a>
