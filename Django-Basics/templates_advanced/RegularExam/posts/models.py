@@ -1,6 +1,4 @@
-# posts/models.py
 from django.db import models
-
 from author.models import Author
 
 
