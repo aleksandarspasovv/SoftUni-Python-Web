@@ -38,25 +38,25 @@ def dashboard_view(request):
     return render(request, 'dashboard.html', {'posts': posts})
 
 
-def post_details_view(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+def post_details_view(request, pk):  # Change id to pk
+    post = get_object_or_404(Post, pk=pk)  # Use pk to fetch the post
     return render(request, 'post/details-post.html', {'post': post})
 
 
-def edit_post_view(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+def edit_post_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
-            return redirect('post-details', post_id=post.id)
+            return redirect('post-details', pk=post.pk)  # Redirect using pk
     else:
         form = PostForm(instance=post)
     return render(request, 'post/edit-post.html', {'form': form, 'post': post})
 
 
-def delete_post_view(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+def delete_post_view(request, pk):
+    post = get_object_or_404(Post, id=pk)
     if request.method == 'POST':
         post.delete()
         return redirect('dashboard')
