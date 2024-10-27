@@ -3,9 +3,9 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import TemplateView, RedirectView, ListView, CreateView
 
-from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, PostEditForm, CommentSetForm
+from forumApp.posts.forms import PostCreateForm, PostDeleteForm, PostEditForm, CommentSetForm, SearchForm
 from forumApp.posts.models import Post
 
 
@@ -45,37 +45,58 @@ class IndexView(TemplateView):
 #
 #     return render(request, 'common/index.html', context)
 
+class DashboardView(ListView):
+    queryset = Post.objects.all()
+    template_name = 'posts/dashboard.html'
+    context_object_name = 'posts'
+    form_class = SearchForm
+    success_url = reverse_lazy('dash')
 
-def dashboard(request):
-    form = SearchForm(request.GET)
-    posts = Post.objects.all()
+    def get_queryset(self):
+        if 'query' in self.request.GET:
+            query = self.request.GET.get('query')
 
-    if request.method == "GET":
-        if form.is_valid():
-            query = form.cleaned_data['query']
-            posts = posts.filter(title__icontains=query)
+            self.queryset = self.queryset.filter(title__icontains=query)
 
-    context = {
-        "posts": posts,
-        "form": form,
-    }
-
-    return render(request, 'posts/dashboard.html', context)
+        return self.queryset
 
 
-def add_post(request):
-    form = PostCreateForm(request.POST or None, request.FILES or None)
+# def dashboard(request):
+#     form = SearchForm(request.GET)
+#     posts = Post.objects.all()
+#
+#     if request.method == "GET":
+#         if form.is_valid():
+#             query = form.cleaned_data['query']
+#             posts = posts.filter(title__icontains=query)
+#
+#     context = {
+#         "posts": posts,
+#         "form": form,
+#     }
+#
+#     return render(request, 'posts/dashboard.html', context)
 
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            return redirect('dash')
+class AddPostView(CreateView):
+    model = Post
+    form_class = PostCreateForm
+    template_name = 'posts/add-post.html'
+    success_url = reverse_lazy('dash')
 
-    context = {
-        "form": form,
-    }
 
-    return render(request, 'posts/add-post.html', context)
+# def add_post(request):
+#     form = PostCreateForm(request.POST or None, request.FILES or None)
+#
+#     if request.method == "POST":
+#         if form.is_valid():
+#             form.save()
+#             return redirect('dash')
+#
+#     context = {
+#         "form": form,
+#     }
+#
+#     return render(request, 'posts/add-post.html', context)
 
 
 def edit_post(request, pk: int):
