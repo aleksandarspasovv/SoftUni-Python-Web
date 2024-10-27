@@ -19,7 +19,7 @@ def author_details_view(request):
     author = Author.objects.first()
 
     if author is None:
-        return render(request, 'author/details-author.html', {'author': None})  # or raise a 404
+        return render(request, 'author/details-author.html', {'author': None})
 
     return render(request, 'author/details-author.html', {'author': author})
 
@@ -36,9 +36,11 @@ def edit_author_view(request, pk):
     return render(request, 'author/edit-author.html', {'form': form, 'author': author})
 
 
-def delete_author_view(request):
-    author = Author.objects.first()
+def delete_author_view(request, pk):
+    author = get_object_or_404(Author, pk=pk)
+
     if request.method == 'POST':
         author.delete()
         return redirect('home')
+
     return render(request, 'author/delete-author.html', {'author': author})
