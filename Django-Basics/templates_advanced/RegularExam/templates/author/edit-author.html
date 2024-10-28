@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <section id="edit-author">
+        <div class="form">
+            <h2>Edit Author's Profile</h2>
+
+            <form class="edit-author-form" method="POST" action="{% url 'edit-author' author.pk %}">
+                {% csrf_token %}
+                <div>
+                    <label for="id_first_name">First Name:</label>
+                    <input
+                        type="text"
+                        name="first_name"
+                        value="{{ author.first_name }}"
+                        maxlength="40"
+                        required
+                        id="id_first_name"
+                    />
+                </div>
+
+                <div>
+                    <label for="id_last_name">Last Name:</label>
+                    <input
+                        type="text"
+                        name="last_name"
+                        value="{{ author.last_name }}"
+                        maxlength="50"
+                        required
+                        id="id_last_name"
+                    />
+                </div>
+
+                <div>
+                    <label for="id_pets_number">Pets Number:</label>
+                    <input
+                        type="number"
+                        name="pets_number"
+                        value="{{ author.pets_number }}"
+                        min="0"
+                        required
+                        id="id_pets_number"
+                    />
+                </div>
+
+                <div>
+                    <label for="id_info">Info:</label>
+                    <textarea name="info" cols="40" rows="10" id="id_info">{{ author.info }}</textarea>
+                </div>
+
+                <div>
+                    <label for="id_image_url">Profile Image URL:</label>
+                    <input
+                        type="url"
+                        name="image_url"
+                        value="{{ author.image_url }}"
+                        maxlength="200"
+                        id="id_image_url"
+                    />
+                </div>
+                <button type="submit">Edit</button>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock %}

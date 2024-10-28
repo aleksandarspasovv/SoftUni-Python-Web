@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+   
+    {% if posts %}
+        <h2>Published Posts</h2>
+        <section id="dashboard">
+            {% for post in posts %}
+            <div class="post">
+                <img src="{{ post.image_url }}" alt="{{ post.title }}" />
+                <h3 class="title">{{ post.title }}</h3>
+                <p class="description">{{ post.content|truncatewords:3 }}</p>
+                <a class="details-btn" href="{% url 'post-details' post.pk %}">See More</a>
+                <a class="edit-btn" href="{% url 'edit-post' post.pk %}">Edit</a>
+                <a class="delete-btn" href="{% url 'delete-post' post.pk %}">Delete</a>
+            </div>
+            {% endfor %}
+        </section>
+    {% else %}
+        <h2>No published posts yet.</h2>
+    {% endif %}
+</main>
+{% endblock %}
