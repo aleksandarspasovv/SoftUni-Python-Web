@@ -1,5 +1,7 @@
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
+
+from profiles.choices import GenreChoices
 
 
 # Create your models here.
@@ -18,3 +20,5 @@ class Profile(models.Model):
         blank=True,
         null=True,
     )
+
+
