@@ -1,12 +1,14 @@
 from django.db import models
 
 from forumApp.posts.choices import LanguageChoice
-from forumApp.posts.validators import BadLanguageValidator
+from forumApp.posts.validators import BadLanguageValidator, bad_language_validator
 
 
 class Post(models.Model):
+    TITLE_MAX_LENGTH = 100
+
     title = models.CharField(
-        max_length=100,
+        max_length=TITLE_MAX_LENGTH,
     )
 
     content = models.TextField(
@@ -30,11 +32,10 @@ class Post(models.Model):
     )
 
     image = models.ImageField(
-        upload_to='uploaded_images',
+        upload_to='post_images/',
         blank=True,
         null=True,
     )
-
 
 class Comment(models.Model):
     post = models.ForeignKey(
