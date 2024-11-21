@@ -1,15 +1,15 @@
 from datetime import datetime, time
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import modelform_factory
-from django.http import HttpResponseNotAllowed, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import classonlymethod, method_decorator
 from django.views.generic import TemplateView, RedirectView, ListView, FormView, CreateView, UpdateView, DeleteView, \
     DetailView
 
 from forumApp.decorators import measure_execution_time
-from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, PostEditForm, CommentFormSet
+from forumApp.posts.forms import PostCreateForm, PostDeleteForm, SearchForm, CommentFormSet
 from forumApp.posts.mixins import TimeRestrictedMixin
 from forumApp.posts.models import Post
 
@@ -69,7 +69,7 @@ class DashboardView(ListView, FormView):
         return queryset
 
 
-class AddPostView(CreateView):
+class AddPostView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostCreateForm
     template_name = 'posts/add-post.html'
