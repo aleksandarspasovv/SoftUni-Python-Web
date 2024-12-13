@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}New Traveler's Profile - Travelers Hub{% endblock %}
+
+{% block content %}
+<section id="register">
+    <div class="form">
+        <h2>New Traveler's Profile</h2>
+        <form class="register-form" method="post" action="{% url 'create_traveler' %}">
+            {% csrf_token %}
+            <div>
+                <label for="id_nickname">Nickname:</label>
+                <div class="helptext" id="id_nickname_helptext">*Nicknames can contain only letters and digits.</div>
+                <input type="text" name="nickname" maxlength="30" placeholder="Enter a unique nickname..." required aria-describedby="id_nickname_helptext" id="id_nickname">
+            </div>
+
+            <div>
+                <label for="id_email">Email:</label>
+                <input type="email" name="email" maxlength="30" placeholder="Enter a valid email address..." required id="id_email">
+            </div>
+
+            <div>
+                <label for="id_country">Country:</label>
+                <input type="text" name="country" maxlength="3" placeholder="Enter a country code like <BGR>..." required id="id_country">
+            </div>
+
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

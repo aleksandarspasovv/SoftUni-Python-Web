@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Traveler's Profile - Travelers Hub{% endblock %}
+
+{% block content %}
+<section id="register">
+    <div class="form">
+        <h2>Edit Traveler's Profile</h2>
+        <form class="register-form" method="post" action="{% url 'edit_traveler' %}">
+            {% csrf_token %}
+            <div>
+                <label for="id_nickname">Nickname:</label>
+                <div class="helptext" id="id_nickname_helptext">*Nicknames can contain only letters and digits.</div>
+                <input type="text" name="nickname" value="{{ form.nickname.value }}" maxlength="30" required aria-describedby="id_nickname_helptext" id="id_nickname">
+            </div>
+
+            <div>
+                <label for="id_email">Email:</label>
+                <input type="email" name="email" value="{{ form.email.value }}" maxlength="30" required id="id_email">
+            </div>
+
+            <div>
+                <label for="id_country">Country:</label>
+                <input type="text" name="country" value="{{ form.country.value }}" maxlength="3" required id="id_country">
+            </div>
+
+            <div>
+                <label for="id_about_me">About me:</label>
+                <textarea name="about_me" cols="40" rows="10" id="id_about_me">{{ form.about_me.value }}</textarea>
+            </div>
+
+            <button type="submit">Edit</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

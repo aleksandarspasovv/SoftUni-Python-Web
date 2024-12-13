@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}All Trips - Travelers Hub{% endblock %}
+
+{% block content %}
+<section id="dashboard">
+    {% if trips %}
+    <h2>{{ trips|length }} Shared Trips</h2>
+    <div id="trip-list">
+        {% for trip in trips %}
+        <div class="post">
+            <img src="{{ trip.image_url|default:'/static/images/default-trip.jpg' }}" alt="{{ trip.destination }} img" />
+            <h3 class="title">{{ trip.destination }}</h3>
+            <p class="description">{{ trip.start_date|date:"D d M Y" }}</p>
+            <a class="details-btn" href="{% url 'trip_details' trip.pk %}">Details</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2>No shared trips</h2>
+    {% endif %}
+</section>
+{% endblock %}

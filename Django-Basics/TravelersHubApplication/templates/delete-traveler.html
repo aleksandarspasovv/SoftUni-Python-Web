@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Traveler's Profile - Travelers Hub{% endblock %}
+
+{% block content %}
+<section id="delete">
+    <div class="form">
+        <h2>Do you want to delete your Traveler's Profile?</h2>
+        <form method="post" action="{% url 'delete_traveler' %}">
+            {% csrf_token %}
+            <button type="submit">Yes</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
