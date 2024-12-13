@@ -1,13 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Traveler
-from .forms import TravelerForm
-from ..trips.models import Trip
-from django.shortcuts import redirect, render
-from .forms import TravelerForm
-from .models import Traveler
 from django.shortcuts import render, redirect
-from .forms import TravelerForm
-from ..utils import get_user_obj
+from TravelersHubApplication.travelers.forms import TravelerForm
+from TravelersHubApplication.utils import get_user_obj
 
 
 def create_traveler(request):

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from TravelersHubApplication.travelers import views
 
 urlpatterns = [
     path('traveler/create/', views.create_traveler, name='create_traveler'),

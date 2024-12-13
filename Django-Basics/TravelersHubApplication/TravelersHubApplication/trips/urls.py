@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from TravelersHubApplication.trips import views
 
 urlpatterns = [
     path('all-trips/', views.all_trips, name='all_trips'),

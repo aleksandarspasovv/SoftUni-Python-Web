@@ -1,5 +1,5 @@
 from django import forms
-from .models import Traveler
+from TravelersHubApplication.travelers.models import Traveler
 
 
 class TravelerForm(forms.ModelForm):

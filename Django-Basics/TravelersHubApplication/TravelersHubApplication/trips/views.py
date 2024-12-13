@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Trip
-from .forms import TripForm
-from ..utils import get_user_obj
+from TravelersHubApplication.trips.models import Trip
+from TravelersHubApplication.trips.forms import TripForm
+from TravelersHubApplication.utils import get_user_obj
 
 
 def all_trips(request):
